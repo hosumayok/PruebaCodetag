@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Graficador</title>
+    <script src="Scripts/jquery-1.10.2.min.js"></script>
+    <script src="Scripts/jquery.signalR-2.1.2.min.js"></script>
+    <script src="signalr/hubs"></script>
+</head>
+<body>
+
+    <div>
+        <h2>Datos</h2>
+        <canvas id="canvas" height="500" width="1200"></canvas>
+        <br />
+    </div>
+
+    <script type="text/javascript">
+        var canvas;
+        var context;
+        var Val_max = 100;
+        var Val_min = 0;
+        var sections = 12;
+        var stepSize = 20;
+        var xScale;
+        var yScale;
+        var columnSize = 50;
+        var rowSize = 50;
+        var margin = 10;
+
+        var xAxis = ["", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120"];
+
+        var listaParametrosGrafica = [];
+
+        $(function () {
+            var chat = $.connection.chatHub;
+            chat.client.recibirDato = function (valor, id) {
+                GraficarPunto(valor, id);
+            };
+            $.connection.hub.start().done(function () {
+            });
+        });
+
+        $(function () {
+            var chat = $.connection.chatHub;
+            chat.client.configurarGrafica = function (pId) {
+                var parametros = { id: pId, contador: 1, xAnterior: 0, yAnterior: 1, color: "#" + ((1 << 24) * Math.random() | 0).toString(16) };
+                listaParametrosGrafica.push(parametros);
+            };
+            $.connection.hub.start().done(function () {
+            });
+        });
+
+        $(document).ready(function () {
+
+            canvas = document.getElementById("canvas");
+            context = canvas.getContext("2d");
+            context.fillStyle = "#0099ff"
+            context.font = "20 pt Verdana"
+
+            yScale = (canvas.height - columnSize - margin) / (Val_max - Val_min);
+            xScale = (canvas.width - rowSize) / sections;
+
+            context.strokeStyle = "#009933"; // color of grid lines
+            context.beginPath();
+            // print Parameters on X axis, and grid lines on the graph
+            for (i = 1; i <= sections; i++) {
+                var x = i * xScale;
+                context.fillText(xAxis[i], x + columnSize, columnSize - margin);
+                context.moveTo(x + columnSize, columnSize);
+                context.lineTo(x + columnSize, canvas.height - 0);
+            }
+            // print row header and draw horizontal grid lines
+            var count = 0;
+            for (scale = Val_max; scale >= Val_min; scale = scale - stepSize) {
+                var y = columnSize + (yScale * count * stepSize) + margin;
+                context.fillText(scale, margin, y + margin);
+                context.moveTo(rowSize, y)
+                context.lineTo(canvas.width, y)
+                count++;
+            }
+            context.stroke();
+            context.translate(rowSize, canvas.height + Val_min * yScale);
+            context.scale(1, -1 * yScale);
+        });
+
+        function GraficarPunto(valor, id) {
+            canvas = document.getElementById("canvas");
+            context = canvas.getContext("2d");
+
+            for (var i = 0; i < listaParametrosGrafica.length; i++) {
+                if(listaParametrosGrafica[i]["id"] == id)
+                {
+                    context.fillStyle = listaParametrosGrafica[i]["color"];
+                    context.strokeStyle = listaParametrosGrafica[i]["color"];
+                    context.beginPath();
+                    context.lineTo(listaParametrosGrafica[i]["xAnterior"], listaParametrosGrafica[i]["yAnterior"]);
+                    context.lineTo(xScale * listaParametrosGrafica[i]["contador"] / 10, valor);
+                    listaParametrosGrafica[i]["xAnterior"] = xScale * listaParametrosGrafica[i]["contador"] / 10;
+                    listaParametrosGrafica[i]["yAnterior"] = valor;
+                    listaParametrosGrafica[i]["contador"]++;
+                }
+            }
+            context.stroke()
+        }
+
+    </script>
+
+
+
+
+
+
+
+</body>
+</html>
