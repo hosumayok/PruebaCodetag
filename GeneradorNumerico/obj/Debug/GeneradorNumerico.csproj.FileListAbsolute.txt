@@ -1,0 +1,6 @@
+c:\users\corruptor\documents\visual studio 2013\Projects\AplicacionWeb\GeneradorNumerico\bin\Debug\GeneradorNumerico.exe.config
+c:\users\corruptor\documents\visual studio 2013\Projects\AplicacionWeb\GeneradorNumerico\bin\Debug\GeneradorNumerico.exe
+c:\users\corruptor\documents\visual studio 2013\Projects\AplicacionWeb\GeneradorNumerico\bin\Debug\GeneradorNumerico.pdb
+c:\users\corruptor\documents\visual studio 2013\Projects\AplicacionWeb\GeneradorNumerico\obj\Debug\GeneradorNumerico.csprojResolveAssemblyReference.cache
+c:\users\corruptor\documents\visual studio 2013\Projects\AplicacionWeb\GeneradorNumerico\obj\Debug\GeneradorNumerico.exe
+c:\users\corruptor\documents\visual studio 2013\Projects\AplicacionWeb\GeneradorNumerico\obj\Debug\GeneradorNumerico.pdb

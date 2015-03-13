@@ -1,0 +1,6 @@
+c:\users\corruptor\documents\visual studio 2013\Projects\AplicacionWeb\ServidorSuma\bin\Debug\ServidorSuma.exe.config
+c:\users\corruptor\documents\visual studio 2013\Projects\AplicacionWeb\ServidorSuma\bin\Debug\ServidorSuma.exe
+c:\users\corruptor\documents\visual studio 2013\Projects\AplicacionWeb\ServidorSuma\bin\Debug\ServidorSuma.pdb
+c:\users\corruptor\documents\visual studio 2013\Projects\AplicacionWeb\ServidorSuma\obj\Debug\ServidorSuma.exe
+c:\users\corruptor\documents\visual studio 2013\Projects\AplicacionWeb\ServidorSuma\obj\Debug\ServidorSuma.pdb
+c:\users\corruptor\documents\visual studio 2013\Projects\AplicacionWeb\ServidorSuma\obj\Debug\ServidorSuma.csprojResolveAssemblyReference.cache
